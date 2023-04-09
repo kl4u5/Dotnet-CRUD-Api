@@ -18,7 +18,9 @@ namespace Data.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("CrudApiDb");
+            //optionsBuilder.UseInMemoryDatabase("CrudApiDb");
+            var connectionString = _configuration.GetConnectionString("MySQLDatabase");
+            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
 
         public DbSet<Product> Products { get; set; }
